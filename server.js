@@ -26,7 +26,7 @@ function fetch(book_name, res){
 					str = str[0]; 
 					str = S(str).replaceAll("  ", "").s;
 					
-					//str = S(str).replaceAll("[0_9]南校区", "\n南校区").s;
+					
 					
 					options.path = "/F?func=find-b&request=";
 					res.reply(str);
