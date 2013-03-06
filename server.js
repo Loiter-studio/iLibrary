@@ -3,14 +3,16 @@ var wechat = require('wechat'),
 		iconv = require('iconv-lite'),
 		url = require('url'),
 		$ = require('jquery'),
-		S = require('string');
-
+		S = require('string'),
+		connect = require('connect');
 		
+var app = connect();
 var options = {  
     host: '202.116.64.108',  
     port: 8991,  
     path: '/F?func=find-b&request=' ,
 };
+
 function fetch(book_name, res){
 	options.path = options.path + book_name;
 	
@@ -38,6 +40,8 @@ function fetch(book_name, res){
 app.use(connect.query());
 app.use('/wechat', wechat('iLibrary', wechat.text(function (message, req, res, next) {
 			fetch(message.Content, res);
-		});
+		})
 	)
 );
+app.listen(3000);
+console.log("listen 3000");
