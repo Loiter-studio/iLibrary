@@ -14,7 +14,9 @@ var options = {
 };
 
 function fetch(book_name, res){
+	var _res = res;
 	options.path = options.path + book_name;
+	var rlt = "";
 	
 	var html = '';  
 	http.get(options, function(res) {  
@@ -22,17 +24,18 @@ function fetch(book_name, res){
 				html += data;  
 		}).on('end', function() {
 				var title = $(html).find("td.col2").each(function(){
-					console.log($(this).children('.itemtitle').text());
+					var name = $(this).children('.itemtitle').text();
 					var str = $(this).children('table').text().split('\n');
 					str = str[6].split("',this)");
 					str = str[0]; 
 					str = S(str).replaceAll("  ", "").s;
 					
-					
-					
+					str = name + "\n" + str;
+					rlt = rlt + name + "\n";
+					console.log(rlt);
 					options.path = "/F?func=find-b&request=";
-					res.reply(str);
 				});
+				_res.reply(rlt);
 		 });  
 	});
 }
