@@ -37,5 +37,7 @@ function fetch(book_name, res){
 
 app.use(connect.query());
 app.use('/wechat', wechat('iLibrary', wechat.text(function (message, req, res, next) {
-	fetch(message.Content, res);
-}
+			fetch(message.Content, res);
+		});
+	)
+);
